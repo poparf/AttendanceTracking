@@ -1,0 +1,14 @@
+{
+  "name": "ro.ase.acs",
+  "version": "1.0.0",
+  "description": "Web tech group project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Popa Robert-Florian, Nastase Alexandru, Nedelschi Matei",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
