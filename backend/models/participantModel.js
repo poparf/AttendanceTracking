@@ -1,17 +1,10 @@
 const { Model, DataTypes } = require("sequelize");
 
-const { sequelize } = require("../db");
-
-const Event = require("./eventModel");
+const { sequelize } = require("../utils/db");
 
 class Participant extends Model {}
 Participant.init(
   {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
     name: {
       type: DataTypes.TEXT,
       allowNull: false,
@@ -25,8 +18,5 @@ Participant.init(
     modelName: "participant",
   }
 );
-
-Event.hasMany(Participant);
-Participant.sync();
 
 module.exports = Participant;

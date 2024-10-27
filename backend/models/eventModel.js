@@ -1,17 +1,10 @@
 const { Model, DataTypes } = require("sequelize");
 
-const { sequelize } = require("../db");
-
-const Group = require("./groupModel");
+const { sequelize } = require("../utils/db");
 
 class Event extends Model {}
 Event.init(
   {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
     name: {
       type: DataTypes.TEXT,
       allowNull: false,
@@ -36,8 +29,5 @@ Event.init(
     modelName: "event",
   }
 );
-
-Group.hasMany(Event);
-Event.sync();
 
 module.exports = Event;
