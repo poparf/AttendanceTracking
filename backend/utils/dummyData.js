@@ -1,7 +1,4 @@
-const Event = require("../models/eventModel");
-const Group = require("../models/groupModel");
-const Organizer = require("../models/organizerModel");
-const Participant = require("../models/participantModel");
+const { Event, Group, Organizer, Participant } = require("../models/setup");
 
 const insertDummyData = async () => {
   // Truncate tables to start fresh
@@ -15,10 +12,10 @@ const insertDummyData = async () => {
 
   console.log(robert.id);
   // Create a group and assign the organizer to it
-  const fitnessGroup = await Group.create({ name: "Fitness",
-    organizerId: robert.id
-   });
-
+  const fitnessGroup = await Group.create({
+    name: "Fitness",
+    organizerId: robert.id,
+  });
 
   const adunareEvent = await Event.create({
     name: "Adunarea generala",
@@ -27,7 +24,7 @@ const insertDummyData = async () => {
     status: "OPEN",
     openDate: new Date(),
     code: "ABC123",
-    groupId: fitnessGroup.id
+    groupId: fitnessGroup.id,
   });
 
   const antrenamentEvent = await Event.create({
@@ -37,25 +34,24 @@ const insertDummyData = async () => {
     status: "CLOSED",
     openDate: new Date(),
     code: "CDE456",
-    groupId: fitnessGroup.id
+    groupId: fitnessGroup.id,
   });
-
 
   const alexParticipant1 = await Participant.create({
     name: "alex",
     joined: new Date(),
-    eventId: adunareEvent.id
+    eventId: adunareEvent.id,
   });
   const mateiParticipant1 = await Participant.create({
     name: "matei",
     joined: new Date(),
-    eventId: adunareEvent.id
+    eventId: adunareEvent.id,
   });
 
   const alexParticipant2 = await Participant.create({
     name: "alex",
     joined: new Date(),
-    eventId: antrenamentEvent.id
+    eventId: antrenamentEvent.id,
   });
 };
 

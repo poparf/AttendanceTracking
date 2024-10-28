@@ -1,9 +1,7 @@
 const express = require("express");
 const groupRouter = express.Router();
-const Group = require("../models/groupModel");
-const Organizer = require("../models/organizerModel");
 const AppError = require("../utils/errors/AppError");
-const Event = require("../models/eventModel")
+const { Group, Organizer, Event } = require("../models/setup");
 // Base-url: /api/group
 
 // Gets an req.query.organizer to filter
