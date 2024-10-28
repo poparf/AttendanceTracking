@@ -9,6 +9,10 @@ Organizer.init(
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    googleId: {
+      type: DataTypes.TEXT,
+      allowNull: true // TODO: Switch to false
+    }
   },
   {
     sequelize,

@@ -59,7 +59,6 @@ groupRouter.get("/", async (req, res, next) => {
 
     res.json(groups);
   } catch (error) {
-    // Pass error to error handling middleware
     next(error);
   }
 });
