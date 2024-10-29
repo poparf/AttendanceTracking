@@ -19,3 +19,4 @@ const generateQR = async (code) => {
     }
 }
 
+generateQR("12345")

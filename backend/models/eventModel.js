@@ -19,6 +19,9 @@ Event.init(
     openDate: {
       type: DataTypes.DATE,
     },
+    closingDate: {
+      type: DataTypes.DATE,
+    },
     code: {
       type: DataTypes.TEXT,
       allowNull: false,

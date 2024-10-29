@@ -16,11 +16,11 @@ passport.use(new GoogleStrategy({
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: "http://localhost:3001/auth/google/callback" // TODO: Asta trb sa faca redirect catre frontend nu backend
   },
-  (accessToken, refreshToken, profile, next) => {
+  async (accessToken, refreshToken, profile, next) => {
 
     // Aici creezi user ul
     //console.log(profile);
-    //Organizer.findOrCreate({where: { googleId: profile.id, name: profile.displayName }});
+    await Organizer.findOrCreate({where: { id: profile.id, name: profile.displayName }});
     
     const token = jwt.sign({
       id: profile.id,

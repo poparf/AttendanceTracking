@@ -2,6 +2,7 @@ const express = require("express");
 const groupRouter = express.Router();
 const AppError = require("../utils/errors/AppError");
 const { Group, Organizer, Event } = require("../models/setup");
+const { authToken } = require("../utils/middlewares")
 // Base-url: /api/group
 
 // Gets an req.query.organizer to filter
@@ -27,6 +28,27 @@ const { Group, Organizer, Event } = require("../models/setup");
 //     },
 //     // ... more groups
 // ]
+
+groupRouter.post("/", authToken, async (req, res, next) => {
+  try {
+    
+    if(!req.body.group)
+      throw new AppError("You must include information about the group.");
+
+    const [newGroup, wasCreated ] = await Group.findOrCreate({ where: {
+      organizerId: req.user.id,
+      name: req.body.name
+    }})
+
+    if(wasCreated)
+      return res.statusCode(201).send(newGroup);
+    else
+      throw new AppError("Resource with that name already exists.", 409);
+
+  } catch (error) {
+    next(error);
+  }
+})
 
 groupRouter.get("/", async (req, res, next) => {
   try {
