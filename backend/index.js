@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken')
 const express = require("express");
 const app = express();
 const JWT_SECRET = process.env.JWT_SECRET;
+const cors = require('cors')
 
 const { connectToDatabase } = require("./utils/db");
 
@@ -20,8 +21,8 @@ passport.use(new GoogleStrategy({
 
     // Aici creezi user ul
     //console.log(profile);
-    await Organizer.findOrCreate({where: { id: profile.id, name: profile.displayName }});
-    
+    await Organizer.findOrCreate({where: { googleId: profile.id, name: profile.displayName }});
+    console.log(profile)
     const token = jwt.sign({
       id: profile.id,
       name: profile.displayName
@@ -41,6 +42,10 @@ const AppError = require("./utils/errors/AppError");
 const groupRouter = require("./routes/groupRouter");
 const organizerRouter = require("./routes/organizerRouter");
 const authRouter = require('./routes/authRouter')
+authRouter.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}))
 const eventRouter = require("./routes/eventRouter")
 
 const { errorHandler } = require("./utils/middlewares");
