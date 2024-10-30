@@ -1,7 +1,7 @@
 const express = require("express");
 const authRouter = express.Router();
 const passport = require('passport')
-
+const { authToken } = require("../utils/middlewares")
 
 authRouter.get("/auth/google/userdetails", authToken, async (req, res, next) => {
     try {

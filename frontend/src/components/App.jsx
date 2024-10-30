@@ -1,44 +1,43 @@
 import React from "react";
-import { GoogleLogin } from "@react-oauth/google";
 import { useEffect, useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import Logout from "./Logout";
 import UserDetails from "./UserDetails";
-import getUserDetails from "../services/getUserDetails"
+import ParticipantForm from "./ParticipantForm";
+import GroupForm from "./GroupForm";
+import LoginForm from "./LoginForm";
+import GroupList from "./GroupList";
 
 const App = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    let token = localStorage.getItem('token');
-    if(token !== null) {
-      let userDetails = getUserDetails(token);
-      if(userDetails == null) {
-        console.error("Error fetching user data:", error);
-        localStorage.removeItem('token'); // Clear invalid token
-        return;
-      }
-      setUser(userDetails);
+    let token = localStorage.getItem("token");
+    if (token !== null) {
+      axios
+        .get("http://localhost:3001/auth/google/userdetails", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          setUser(res.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     }
   }, []);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('token');
-    
+    const token = urlParams.get("token");
+
     if (token) {
-      localStorage.setItem('token', token);
-      window.history.replaceState({}, document.title, window.location.pathname);      
+      localStorage.setItem("token", token);
+      window.history.replaceState({}, document.title, window.location.pathname);
     }
   }, []);
-
-  const handleSuccess = (credentials) => {
-    setUser(getUserDetails(credentials.credential));
-  }
-
-  const handleError = (error) => {
-    console.error(error);
-  }
 
   return (
     <div
@@ -63,42 +62,27 @@ const App = () => {
           >
             {!user ? (
               <>
-                <p>Enter your email:</p>
-                <input type="text" name="" id="" className="form-control mb-3" />
-                <br />
-                <p>Or sign in with google:</p>
-                <GoogleLogin onSuccess={handleSuccess}
-                  onError={handleError}/>
-                <button
-                  className="btn btn-outline-dark"
-                  onClick={() =>
-                    (window.location.href = "http://localhost:3001/auth/google")
-                  }
-                >
-                  
-                  Sign in with Google
-                </button>
+                <LoginForm />
               </>
             ) : (
-              <div className="text-center">
-                <UserDetails user={user}/>
-                <Logout setUser={setUser}/>
-              </div>
+              <>
+                <div className="text-center">
+                  <UserDetails user={user} />
+
+                  <Logout setUser={setUser} />
+                </div>
+              </>
             )}
           </div>
-          <div
-            className="col-md-6"
-            style={{
-              backgroundColor: "green",
-              minHeight: "400px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "2rem",
-            }}
-          >
-            <h2 className="text-white">Enter as participant</h2>
-          </div>
+          {!user ? (
+            <>
+              <ParticipantForm />
+            </>
+          ) : (
+            <>
+              <GroupList user={user}/>
+            </>
+          )}
         </div>
       </div>
     </div>
