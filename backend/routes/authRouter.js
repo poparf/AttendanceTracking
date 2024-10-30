@@ -2,6 +2,16 @@ const express = require("express");
 const authRouter = express.Router();
 const passport = require('passport')
 
+
+authRouter.get("/auth/google/userdetails", authToken, async (req, res, next) => {
+    try {
+        console.log(req.user);
+        return res.status(200).send(req.user);
+    } catch (error) {
+        next(error);
+    }
+})
+
 authRouter.get("/auth/google",
     passport.authenticate('google', 
         {

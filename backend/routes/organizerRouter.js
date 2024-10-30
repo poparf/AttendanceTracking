@@ -2,6 +2,7 @@ const express = require('express')
 const organizerRouter = express.Router()
 const { Organizer } = require("../models/setup");
 const AppError = require('../utils/errors/AppError');
+const { authToken } = require('../utils/middlewares');
 
 // Base-url: /api/organizer
 
@@ -13,7 +14,6 @@ organizerRouter.get("/:id", async (req, res, next) => {
         next(error);
     }
 })
-
 
 
 // organizerRouter.post("/", async (req, res, next) => {
