@@ -2,7 +2,7 @@ import GoogleBtn from "./GoogleBtn";
 
 const LoginForm = () => {
   return (
-    <div className="flex-col">
+    <div className="flex-col text-white mr-8">
       <p>Enter your email:</p>
       <input type="text" name="" id="" className="form-control mb-3" />
       <br />

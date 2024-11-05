@@ -2,7 +2,7 @@ const ParticipantForm = () => {
   return (
     <div>
       <h2 className="text-white">Enter as participant</h2>
-      Enter code: <input type="text" name="" id="" />
+      <label htmlFor="input">Enter code:</label><input type="text" name="" id="" />
     </div>
   );
 };

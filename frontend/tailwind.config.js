@@ -10,6 +10,7 @@ export default {
     extend: {
       colors: {
         customColors: {
+          "alien-green": '#03FFA1',
           "dark-green-shadow": "#687f69",
           "dark-green": "#042A05",
           "medium-green": "258073",

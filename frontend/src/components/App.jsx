@@ -41,22 +41,30 @@ const App = () => {
   }, []);
 
   return (
-    <div className="font- flex justify-center items-center w-screen h-screen bg-customColors-dark-green-shadow">
+    <>
       {!user ? (
-        <div className="rounded-md flex justify-center items-center h-5/6 w-5/6 bg-customColors-dark-green">
-          <LoginForm />
-          <ParticipantForm />
-        </div>
-      ) : (
-        <div>
-          <UserDetails user={user} />
-          <Logout setUser={setUser} />
-          <div>
-            <GroupList user={user} />
+        <div className="text-white  flex justify-center items-center font-sferaregular  w-screen h-screen bg-black">
+          <div className="rounded-md flex justify-center items-center h-5/6 w-5/6 bg-customColors-dark-green">
+            <LoginForm />
+            <ParticipantForm />
           </div>
         </div>
+      ) : (
+        <div className="text-white font-sferaregular  w-screen h-screen bg-black">
+          <div className="flex items-start justify-between p-6">
+            <div className="ml-6">
+              <UserDetails user={user} />
+            </div>
+            <div className="mr-6">
+              <Logout setUser={setUser} />
+            </div>
+          </div>
+            <div className="font-everettlight text-white">
+              <GroupList user={user} />
+            </div>
+        </div>
       )}
-    </div>
+    </>
   );
 };
 
