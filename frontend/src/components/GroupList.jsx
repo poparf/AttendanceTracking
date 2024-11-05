@@ -29,7 +29,7 @@ const GroupList = ({ user }) => {
               {group.events.map((event, idx) => {
                 return (
                 <div key={idx}>
-                  <Event event={event} />;
+                  <Event event={event} />
                 </div>
                 )
               })}

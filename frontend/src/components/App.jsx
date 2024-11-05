@@ -7,6 +7,7 @@ import ParticipantForm from "./ParticipantForm";
 import GroupForm from "./GroupForm";
 import LoginForm from "./LoginForm";
 import GroupList from "./GroupList";
+import GoogleBtn from "./GoogleBtn";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -40,51 +41,21 @@ const App = () => {
   }, []);
 
   return (
-    <div
-      className="bg-dark"
-      style={{
-        width: "100%",
-        height: "100vh",
-      }}
-    >
-      <div
-        className="container min-vh-100 d-flex align-items-center"
-        style={{ border: "1px solid black" }}
-      >
-        <div className="row w-100 m-0">
-          <div
-            className="col-md-6"
-            style={{
-              backgroundColor: "white",
-              minHeight: "400px",
-              padding: "2rem",
-            }}
-          >
-            {!user ? (
-              <>
-                <LoginForm />
-              </>
-            ) : (
-              <>
-                <div className="text-center">
-                  <UserDetails user={user} />
-
-                  <Logout setUser={setUser} />
-                </div>
-              </>
-            )}
-          </div>
-          {!user ? (
-            <>
-              <ParticipantForm />
-            </>
-          ) : (
-            <>
-              <GroupList user={user}/>
-            </>
-          )}
+    <div className="font- flex justify-center items-center w-screen h-screen bg-customColors-dark-green-shadow">
+      {!user ? (
+        <div className="rounded-md flex justify-center items-center h-5/6 w-5/6 bg-customColors-dark-green">
+          <LoginForm />
+          <ParticipantForm />
         </div>
-      </div>
+      ) : (
+        <div>
+          <UserDetails user={user} />
+          <Logout setUser={setUser} />
+          <div>
+            <GroupList user={user} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

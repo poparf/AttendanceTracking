@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    @font-face {
+        src: url(./fonts/SferaRegular.woff2) format("woff2");
+        font-family: 'sfera-regular'
+    }
+    @font-face {
+        src: url(./fonts/EverettLight.woff2) format("woff2");
+        font-family: 'everettlight'
+    }
+}

@@ -1,17 +1,8 @@
 const ParticipantForm = () => {
   return (
-    <div
-      className="col-md-6"
-      style={{
-        backgroundColor: "green",
-        minHeight: "400px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "2rem",
-      }}
-    >
+    <div>
       <h2 className="text-white">Enter as participant</h2>
+      Enter code: <input type="text" name="" id="" />
     </div>
   );
 };
