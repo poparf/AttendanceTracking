@@ -2,10 +2,8 @@ import GoogleBtn from "./GoogleBtn";
 
 const LoginForm = () => {
   return (
-    <div className="flex-col text-white mr-8">
-      <p>Enter your email:</p>
-      <input type="text" name="" id="" className="form-control mb-3" />
-      <br />
+    <div className="flex-col text-center text-white mr-8">
+      <p className="mb-2">Register below</p>
       <GoogleBtn />
     </div>
   );

@@ -43,14 +43,15 @@ const App = () => {
   return (
     <>
       {!user ? (
-        <div className="text-white  flex justify-center items-center font-sferaregular  w-screen h-screen bg-black">
-          <div className="rounded-md flex justify-center items-center h-5/6 w-5/6 bg-customColors-dark-green">
+        <div className="text-white  flex justify-center items-center  w-screen h-screen ">
+          <div className="rounded-md md:flex-row flex flex-col justify-center items-center h-5/6 w-5/6 bg-gray-400">
             <LoginForm />
+            <div className="md:m-0 mt-8 mb-8"></div>
             <ParticipantForm />
           </div>
         </div>
       ) : (
-        <div className="text-white font-sferaregular  w-screen h-screen bg-black">
+        <div className=" w-screen h-screen">
           <div className="flex items-start justify-between p-6">
             <div className="ml-6">
               <UserDetails user={user} />

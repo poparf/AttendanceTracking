@@ -63,7 +63,7 @@ groupRouter.get("/", async (req, res, next) => {
       include: [
         {
           model: Event,
-          attributes: ["name", "description", "status", "openDate"],
+          attributes: ["name", "description", "status", "openDate", "closingDate"],
         },
         {
           model: Organizer,

@@ -1,8 +1,8 @@
 const ParticipantForm = () => {
   return (
     <div>
-      <h2 className="text-white">Enter as participant</h2>
-      <label htmlFor="input">Enter code:</label><input type="text" name="" id="" />
+      <p className="mb-2">Be present at an event:</p>
+      <input className="text-black border-0 p-2" type="text" placeholder="Enter code"/>
     </div>
   );
 };
