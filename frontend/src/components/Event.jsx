@@ -1,39 +1,38 @@
 const parseDate = (date) => {
   let openingDate = new Date(date);
-  let modifiedEventOpeningDate = '';
-  modifiedEventOpeningDate = modifiedEventOpeningDate.concat(openingDate.getDate());
-  modifiedEventOpeningDate = modifiedEventOpeningDate.concat("/");
-  modifiedEventOpeningDate = modifiedEventOpeningDate.concat(openingDate.getMonth());
-  modifiedEventOpeningDate = modifiedEventOpeningDate.concat("/");
-  modifiedEventOpeningDate = modifiedEventOpeningDate.concat(openingDate.getFullYear());
-  modifiedEventOpeningDate = modifiedEventOpeningDate.concat(" ");
-  modifiedEventOpeningDate = modifiedEventOpeningDate.concat(openingDate.getHours());
-  modifiedEventOpeningDate = modifiedEventOpeningDate.concat(":");
-  modifiedEventOpeningDate = modifiedEventOpeningDate.concat(openingDate.getMinutes());
-
+  let modifiedEventOpeningDate = openingDate.getDate() + "/" + openingDate.getMonth() + "/"  + openingDate.getFullYear() + " " + openingDate.getHours() + ":" + openingDate.getMinutes();
   return modifiedEventOpeningDate;
 }
 
 const Event = ({event}) => {
-    const generateQRCode = () => {
-        // TODO:generate qr code and show it on the screen
+   
+    const [showPopUp, setShowPopUp] = useState(false);
+    const []
+
+    const handleGenerateBtnClick = () => {
+      setShowPopUp(!showPopUp);
     }
 
-    return <div className="flex-row md:m-12">
+    const generateQRCode = () => {
+        
+    }
+
+    console.log(event);
+    return <div className="flex-row md:m-12 border-2 p-2">
     <div>
-        <div className="flex justify-between bg-red-400">
+        <div className="flex justify-between">
           <p>{event.name}</p>
           <p>{event.status}</p>
         </div>
-        <div className="flex justify-end bg-red-600">
+        <div className="flex justify-end">
           <p>{parseDate(event.openDate)} - {parseDate(event.closingDate)}</p>
         </div>
-        <div className="flex justify-between bg-green-300">
+        <div className="flex justify-between border-t-2">
           <p>{event.description}</p>
-          <div className="flex-col bg-blue-300">
-            <p>Code: {event.code}</p>
-            <button>Generate QR Code</button>
-          </div>
+        <div className="flex-col border-l-2 p-2">
+          <p>Code: {event.code}</p>
+          <button className="btn btn-primary" onClick={handleGenerateBtnClick}>QRCode</button>
+        </div>
         </div>
       </div>
     </div>

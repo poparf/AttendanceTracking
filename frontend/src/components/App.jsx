@@ -60,7 +60,7 @@ const App = () => {
               <Logout setUser={setUser} />
             </div>
           </div>
-            <div className="font-everettlight text-white">
+            <div className="font-everettlight text-black">
               <GroupList user={user} />
             </div>
         </div>
