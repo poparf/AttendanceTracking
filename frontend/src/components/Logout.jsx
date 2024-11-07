@@ -5,11 +5,9 @@ const Logout = ({ setUser }) => {
   };
 
   return (
-    <div>
-      <button className="btn btn-danger mt-3" onClick={handleLogout}>
+      <button className="btn btn-danger" onClick={handleLogout}>
         Logout
       </button>
-    </div>
   );
 };
 

@@ -32,7 +32,7 @@ authRouter.get("/auth/google/callback",
         }
         
         // Redirect with the token
-        res.redirect(`http://localhost:5173?token=${req.user.token}`);
+        res.redirect(`http://localhost:5173/login?token=${req.user.token}`);
     }
 );
 

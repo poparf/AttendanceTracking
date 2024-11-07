@@ -6,9 +6,7 @@ const PopUp = ({ code, setShowPopUp }) => {
     try {
       let qrCanvas = document.getElementById("qr-canvas");
       await QRCode.toCanvas(qrCanvas, text, { width: 256 });
-      console.log("done.");
     } catch (err) {
-      // TODO: Do something in case of error...
       console.error(err);
     }
   };

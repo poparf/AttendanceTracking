@@ -50,12 +50,8 @@ groupRouter.post("/", authToken, async (req, res, next) => {
   }
 })
 
-groupRouter.get("/", async (req, res, next) => {
+groupRouter.get("/", authToken, async (req, res, next) => {
   try {
-    if (!req.query.organizer) {
-      throw new AppError("Organizer name is required", 400);
-    }
-
     const groups = await Group.findAll({
       attributes: {
         exclude: ["modifiedAt"],
@@ -63,13 +59,13 @@ groupRouter.get("/", async (req, res, next) => {
       include: [
         {
           model: Event,
-          attributes: ["name", "description", "status", "openDate", "closingDate"],
+          attributes: ["name", "description", "status", "openDate", "closingDate", "code"],
         },
         {
           model: Organizer,
           attributes: ["name"],
           where: {
-            name: req.query.organizer,
+            name: req.user.name,
           },
         },
       ],
@@ -78,7 +74,6 @@ groupRouter.get("/", async (req, res, next) => {
     if (!groups.length) {
       throw new AppError("No groups found for this organizer", 404);
     }
-
     res.json(groups);
   } catch (error) {
     next(error);

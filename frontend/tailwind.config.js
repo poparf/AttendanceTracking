@@ -16,6 +16,9 @@ export default {
           "medium-green": "258073",
           "light-green": "#15AA5C",
           "light-yellow": "#D2FF06",
+          "dark-blue": "#14213d",
+          "orange": "#fca311",
+          "special-gray": "#e5e5e5"
         },
       },
     },
