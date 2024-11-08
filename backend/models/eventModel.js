@@ -14,12 +14,12 @@ Event.init(
       allowNull: false,
     },
     status: {
-      type: DataTypes.ENUM("OPEN", "CLOSED"),
+      type: DataTypes.ENUM("UPCOMING", "ONGOING", "CLOSED"),
     },
     openDate: {
       type: DataTypes.DATE,
     },
-    closingDate: {
+    closeDate: {
       type: DataTypes.DATE,
     },
     code: {

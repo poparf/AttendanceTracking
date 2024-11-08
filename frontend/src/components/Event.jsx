@@ -23,6 +23,16 @@ const Event = ({ event }) => {
     setShowPopUp(!showPopUp);
   };
 
+  let spanStyling =
+    "ml-auto px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800";
+  if (event.status === "CLOSED") {
+    spanStyling =
+      "ml-auto px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800";
+  } else if (event.status === "ONGOING") {
+    spanStyling =
+      "ml-auto px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800";
+  }
+  
   return (
     <div className="max-w-3xl mx-auto">
       <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6 mb-4">
@@ -34,62 +44,58 @@ const Event = ({ event }) => {
               className="ml-2 p-2 hover:bg-gray-100 rounded-full transition-colors"
             >
               {isExpanded ? (
-                <ChevronUp onClick={() => setIsExpanded(false)} className="h-5 w-5 text-gray-600" />
+                <ChevronUp
+                  onClick={() => setIsExpanded(false)}
+                  className="h-5 w-5 text-gray-600"
+                />
               ) : (
-                <ChevronDown onClick={() => setIsExpanded(true)} className="h-5 w-5 text-gray-600" />
+                <ChevronDown
+                  onClick={() => setIsExpanded(true)}
+                  className="h-5 w-5 text-gray-600"
+                />
               )}
             </button>
             <h2 className="ml-2 text-xl font-semibold text-gray-800">
               {event.name}
             </h2>
 
-            <span
-              className={
-                event.status === "OPEN"
-                  ? "ml-auto px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800"
-                  : "ml-auto px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800"
-              }
-            >
-              {event.status}
-            </span>
+            <span className={spanStyling}>{event.status}</span>
           </div>
 
-            
           <div
             className={`overflow-hidden transition-all ease-in-out duration-400 ${
               isExpanded ? "max-h-[1000px]" : "max-h-0"
-            }`}>
-              {/* Date Range */}
-              <div className="text-right text-sm text-gray-600">
-                <span>
-                  {parseDate(event.openDate)} - {parseDate(event.closingDate)}
-                </span>
-              </div>
-
-              {/* Content */}
-              <div className="flex gap-6 pt-4 border-t border-gray-200">
-                <div className="flex-grow">
-                  <p className="text-gray-700 leading-relaxed">
-                    {event.description}
-                  </p>
-                </div>
-
-                <div className="pl-6 border-l border-gray-200 flex flex-col items-center space-y-3">
-                  <div className="text-sm text-gray-600">
-                    Code:{" "}
-                    <span className="font-mono font-medium">{event.code}</span>
-                  </div>
-                  <button
-                    onClick={handleGenerateBtnClick}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200"
-                  >
-                    QR Code
-                  </button>
-                </div>
-              </div>
+            }`}
+          >
+            {/* Date Range */}
+            <div className="text-right text-sm text-gray-600">
+              <span>
+                {parseDate(event.openDate)} - {parseDate(event.closeDate)}
+              </span>
             </div>
 
+            {/* Content */}
+            <div className="flex gap-6 pt-4 border-t border-gray-200">
+              <div className="flex-grow">
+                <p className="text-gray-700 leading-relaxed">
+                  {event.description}
+                </p>
+              </div>
 
+              <div className="pl-6 border-l border-gray-200 flex flex-col items-center space-y-3">
+                <div className="text-sm text-gray-600">
+                  Code:{" "}
+                  <span className="font-mono font-medium">{event.code}</span>
+                </div>
+                <button
+                  onClick={handleGenerateBtnClick}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200"
+                >
+                  QR Code
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

@@ -2,9 +2,11 @@ import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import useUser from "../hooks/useUser";
+import axios from "axios";
+import { serverBaseUrl } from "../utils/variables";
 
 const CreateEvent = () => {
-  const { groups } = useUser();
+  const { groups, setGroups } = useUser();
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
@@ -25,7 +27,7 @@ const CreateEvent = () => {
     }));
   };
 
-  const createEvent = (e) => {
+  const createEvent = async (e) => {
     e.preventDefault();
 
     const openDateTime = new Date(
@@ -47,15 +49,49 @@ const CreateEvent = () => {
       newEvent.description === "" ||
       newEvent.groupName === ""
     ) {
-      console.log(newEvent)
       setError("Please fill in all fields.");
       return;
     }
 
     setError("");
     // Send the new event to the backend
-
-    console.log(newEvent);
+    const groupId = groups.find((group) => group.name === newEvent.groupName).id;
+    if (!groupId) {
+      setError("Group not found");
+      return;
+    }
+    let requestBody = {
+      name: newEvent.name,
+      description: newEvent.description,
+      openDate: openDateTime,
+      closeDate: closeDateTime,
+      groupId: groupId,
+    }
+      try {
+        const response = await axios.post(`${serverBaseUrl}/api/event`, requestBody, {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        });
+        setMessage("Event created successfully.");
+        setGroups((prevGroups) =>
+          prevGroups.map((group) =>
+            group.id === groupId
+              ? {
+            ...group,
+            events: [
+              ...group.events,
+              response.data
+            ],
+          }
+              : group
+          )
+        );
+        
+      } catch (error) {
+        console.error("Failed to create event", error);
+        setError("Failed to create event");
+    }
+    setTimeout(() => setMessage(""), 3000);
+    setTimeout(() => setError(""), 3000);
   };
 
   return (
@@ -150,7 +186,16 @@ const CreateEvent = () => {
             Create Event
           </button>
         </form>
-        {error === "" ? <br /> : <p className="text-red-500">{error}</p>}
+        {message && (
+          <div className="fixed top-4 right-4 bg-green-500 text-white p-2 rounded-md">
+            {message}
+          </div>
+        )}
+        {error && (
+          <div className="fixed top-4 right-4 bg-red-500 text-white p-2 rounded-md">
+            {error}
+          </div>
+        )}
       </div>
     </div>
   );

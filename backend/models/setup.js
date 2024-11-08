@@ -10,10 +10,10 @@ Event.belongsTo(Group);
 Event.hasMany(Participant);
 Participant.belongsTo(Event);
 
-// Organizer.sync({alter: true});
-// Group.sync({alter: true});
-// Event.sync({alter: true});
-// Participant.sync({alter: true});
+Organizer.sync({alter: true});
+Group.sync({alter: true});
+Event.sync({alter: true});
+Participant.sync({alter: true});
 
 module.exports = {
   Event,
