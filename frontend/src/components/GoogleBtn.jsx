@@ -3,7 +3,7 @@ import { serverBaseUrl } from '../utils/variables';
 
 const GoogleBtn = () => {
     return <button
-    className="btn btn-outline-light flex"
+    className="btn btn-light flex p-2 text-2xl font-light items-center"
     onClick={() =>
       window.open(`${serverBaseUrl}/auth/google`, "_self")
     }
